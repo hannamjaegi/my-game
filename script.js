@@ -121,6 +121,10 @@ function createTarget(gameArea) {
   const target = document.createElement("div");
   target.classList.add("target");
 
+  // 💥 이거 추가해야 함
+  const x = Math.random() * (gameArea.clientWidth - 60);
+  const y = Math.random() * (gameArea.clientHeight - 60);
+
   target.style.left = x + "px";
   target.style.top = y + "px";
 
@@ -136,7 +140,7 @@ function createTarget(gameArea) {
 
   target.dataset.type = type;
 
-  // 🎨 이미지 (로컬)
+  // 🎨 이미지
   target.style.backgroundImage = `url('images/${type}.png')`;
 
   target.onclick = () => handleTargetClick(target);
