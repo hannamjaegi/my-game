@@ -63,7 +63,7 @@ function startGame() {
   clearGameArea();
   updateUI();
 
-  // 💥 난이도 밸런스
+  // 💥 난이도
   if (difficulty === "easy") spawnSpeed = 1200;
   else if (difficulty === "normal") spawnSpeed = 900;
   else if (difficulty === "hard") spawnSpeed = 650;
@@ -79,9 +79,7 @@ function updateTimer() {
   timeLeft--;
   document.getElementById("timer").innerText = "시간: " + timeLeft;
 
-  if (timeLeft <= 0) {
-    endGame();
-  }
+  if (timeLeft <= 0) endGame();
 }
 
 
@@ -92,7 +90,6 @@ function spawnTarget() {
   const gameArea = document.getElementById("gameArea");
 
   let spawnCount = 1;
-
   if (difficulty === "easy") spawnCount = 1;
   if (difficulty === "normal") spawnCount = 2;
   if (difficulty === "hard") spawnCount = 3;
@@ -103,7 +100,6 @@ function spawnTarget() {
     gameArea.appendChild(target);
 
     let lifeTime = 900;
-
     if (difficulty === "easy") lifeTime = 1200;
     if (difficulty === "normal") lifeTime = 900;
     if (difficulty === "hard") lifeTime = 700;
@@ -116,12 +112,12 @@ function spawnTarget() {
 }
 
 
-// 🎯 타겟 생성 (단 하나만 존재)
+// 🎯 타겟 생성 (이미지 적용 핵심!)
 function createTarget(gameArea) {
   const target = document.createElement("div");
   target.classList.add("target");
 
-  // 💥 이거 추가해야 함
+  // 💥 랜덤 위치 (필수)
   const x = Math.random() * (gameArea.clientWidth - 60);
   const y = Math.random() * (gameArea.clientHeight - 60);
 
@@ -140,8 +136,10 @@ function createTarget(gameArea) {
 
   target.dataset.type = type;
 
-  // 🎨 이미지
+  // 💥🔥 핵심: 이미지 연결
   target.style.backgroundImage = `url('images/${type}.png')`;
+  target.style.backgroundSize = "cover";
+  target.style.backgroundPosition = "center";
 
   target.onclick = () => handleTargetClick(target);
 
@@ -149,7 +147,7 @@ function createTarget(gameArea) {
 }
 
 
-// 💥 클릭 처리 (단 하나만 존재)
+// 💥 클릭 처리
 function handleTargetClick(target) {
   if (!isGameRunning) return;
 
@@ -175,13 +173,13 @@ function handleTargetClick(target) {
 }
 
 
-// 📊 점수 업데이트
+// 📊 점수
 function updateScore() {
   document.getElementById("score").innerText = "점수: " + score;
 }
 
 
-// 🧹 게임 초기화
+// 🧹 초기화
 function clearGameArea() {
   document.getElementById("gameArea").innerHTML = "";
 }
@@ -194,7 +192,7 @@ function updateUI() {
 }
 
 
-// 🏁 게임 종료
+// 🏁 종료
 function endGame() {
   isGameRunning = false;
 
@@ -213,7 +211,7 @@ function showInfo() {
 }
 
 
-// 🚀 초기 실행
+// 🚀 시작
 window.onload = () => {
   setDifficulty("normal");
 };
