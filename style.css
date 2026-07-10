@@ -19,11 +19,7 @@ body {
   width: 60px;
   height: 60px;
   position: absolute;
-  cursor: pointer;
-
-  background-size: contain;  /* 💥 핵심 */
-  background-repeat: no-repeat;
-  background-position: center;
+  background-size: cover;
 }
 
 /* 🎮 난이도 버튼 */
