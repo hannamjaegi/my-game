@@ -121,10 +121,6 @@ function createTarget(gameArea) {
   const target = document.createElement("div");
   target.classList.add("target");
 
-  // 💥 위치 계산 (여기서 해야 함!)
-  const x = Math.random() * (gameArea.clientWidth - 60);
-  const y = Math.random() * (gameArea.clientHeight - 60);
-
   target.style.left = x + "px";
   target.style.top = y + "px";
 
