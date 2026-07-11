@@ -141,7 +141,11 @@ function createTarget(gameArea) {
   target.style.backgroundSize = "cover";
   target.style.backgroundPosition = "center";
 
-  target.onclick = () => handleTargetClick(target);
+  target.addEventListener("click", () => handleTargetClick(target));
+target.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // 💥 중복 터치 방지
+  handleTargetClick(target);
+});
 
   return target;
 }
