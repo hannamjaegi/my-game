@@ -1,231 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>집중력 테스트 게임</title>
-
-<style>
-body {
-  font-family: sans-serif;
-  text-align: center;
-  background: #222;
-  color: white;
-}
-
-#gameBoard {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.hole {
-  width: 100px;
-  height: 100px;
-  background: #444;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-#webOverlay {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: rgba(255,255,255,0.2);
-  opacity:0;
-  pointer-events:none;
-}
-
-#effect {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  font-size: 50px;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>클릭 게임</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>🧠 집중력 테스트</h1>
+<div id="ui">
+  <div id="score">점수: 0</div>
+  <div id="timer">시간: 60</div>
+</div>
 
-<div id="problemArea"></div>
-<input id="answerInput" placeholder="정답 입력">
-<button onclick="submitAnswer()">확인</button>
+<div id="buff">🔥 2배!</div>
 
-<h2 id="score">점수: 0</h2>
-<h2 id="combo">콤보: 0</h2>
+<div id="game"></div>
+<div id="blind"></div>
 
-<div id="gameBoard"></div>
+<!-- 수학 문제 화면 -->
+<div id="mathScreen">
+  <h2 id="mathQuestion"></h2>
+  <input type="number" id="mathAnswer">
+  <button onclick="submitAnswer()">확인</button>
+</div>
 
-<div id="webOverlay"></div>
-<div id="effect"></div>
-
-<script>
-let score = 0;
-let combo = 0;
-let multiplier = 1;
-let startTime;
-
-let currentAnswer;
-
-const emojis = {
-  mole: "🐹",
-  diamond: "💎",
-  gold: "🪙",
-  creeper: "💣",
-  silverfish: "🐛",
-  emerald: "🟢"
-};
-
-const board = document.getElementById("gameBoard");
-
-for (let i = 0; i < 9; i++) {
-  const div = document.createElement("div");
-  div.className = "hole";
-  div.onclick = () => hit(div);
-  board.appendChild(div);
-}
-
-function generateProblem() {
-  let a = Math.floor(Math.random()*900)+100;
-  let b = Math.floor(Math.random()*900)+100;
-  currentAnswer = a + b;
-  document.getElementById("problemArea").innerText = `${a} + ${b} = ?`;
-}
-
-function submitAnswer() {
-  const input = document.getElementById("answerInput").value;
-
-  if (Number(input) === currentAnswer) {
-    if (!startTime) {
-      startTime = Date.now();
-      startGame();
-    } else {
-      endGame();
-    }
-  }
-}
-
-function startGame() {
-  setInterval(spawn, 800);
-  setTimeout(stopGame, 20000);
-}
-
-function stopGame() {
-  alert("게임 끝! 마지막 문제!");
-  generateProblem();
-}
-
-function endGame() {
-  let time = (Date.now() - startTime)/1000;
-  alert(`총 시간: ${time}초\n점수: ${score}`);
-}
-
-function spawn() {
-  const holes = document.querySelectorAll(".hole");
-  holes.forEach(h => h.innerText = "");
-
-  let rand = Math.random();
-
-  let type = "mole";
-
-  if (rand < 0.1) type = "diamond";
-  else if (rand < 0.2) type = "gold";
-  else if (rand < 0.3) type = "creeper";
-  else if (rand < 0.4) type = "silverfish";
-  else if (rand < 0.5) type = "emerald";
-
-  const hole = holes[Math.floor(Math.random()*holes.length)];
-  hole.dataset.type = type;
-  hole.innerText = emojis[type];
-}
-
-function hit(hole) {
-  const type = hole.dataset.type;
-  if (!type) return;
-
-  let base = 1;
-
-  switch(type) {
-    case "mole":
-      base = 1;
-      combo++;
-      break;
-
-    case "diamond":
-      base = 3;
-      combo++;
-      break;
-
-    case "gold":
-      multiplier = 2;
-      combo++;
-      showEffect("✨ 2배!");
-      break;
-
-    case "creeper":
-      base = (multiplier===2)? -10 : -5;
-      combo = 0;
-      break;
-
-    case "silverfish":
-      base = -1;
-      combo = 0;
-      webEffect();
-      break;
-
-    case "emerald":
-      if (Math.random() < 0.5) {
-        base = 5;
-        showEffect("🎆");
-      } else {
-        base = -3;
-        lightningEffect();
-      }
-      combo++;
-      break;
-  }
-
-  score += base * multiplier;
-
-  document.getElementById("score").innerText = "점수: " + score;
-  document.getElementById("combo").innerText = "콤보: " + combo;
-
-  hole.innerText = "";
-  hole.dataset.type = "";
-}
-
-function webEffect() {
-  const w = document.getElementById("webOverlay");
-  w.style.opacity = 1;
-  setTimeout(()=>w.style.opacity=0, 1500);
-}
-
-function showEffect(text) {
-  const e = document.getElementById("effect");
-  e.innerText = text;
-  setTimeout(()=>e.innerText="", 500);
-}
-
-function lightningEffect() {
-  const e = document.getElementById("effect");
-  e.innerText = "⚡";
-  setTimeout(()=>e.innerText="", 300);
-}
-
-// 시작 문제 생성
-generateProblem();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
