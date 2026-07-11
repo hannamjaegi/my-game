@@ -1,3 +1,6 @@
+/* ===================== */
+/* 🌌 기본 설정 */
+/* ===================== */
 body {
   margin: 0;
   overflow: hidden;
@@ -6,52 +9,96 @@ body {
   font-family: sans-serif;
 }
 
-/* 시작 화면 */
+/* ===================== */
+/* 🚀 시작 화면 */
+/* ===================== */
 #startScreen {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: #000;
-  z-index: 10000;
+
+  background: black;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  z-index: 10000;
 }
 
-/* UI */
+#startScreen h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+#startScreen input {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#startScreen button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ===================== */
+/* 🎯 UI */
+/* ===================== */
 #ui {
   position: fixed;
   top: 10px;
   left: 10px;
+  font-size: 20px;
   z-index: 1000;
 }
 
+#score {
+  margin-bottom: 5px;
+}
+
+#timer {
+  margin-bottom: 5px;
+}
+
+/* 🔥 버프 */
 #buff {
   position: fixed;
   top: 10px;
   right: 10px;
+  font-size: 22px;
   color: gold;
   display: none;
   z-index: 1000;
 }
 
-/* 게임 */
+/* ===================== */
+/* 🎮 게임 영역 */
+/* ===================== */
 #game {
   width: 100vw;
   height: 100vh;
   position: relative;
 }
 
-/* 타겟 */
+/* 🎯 타겟 */
 .target {
   position: absolute;
   width: 80px;
   height: 80px;
   cursor: pointer;
+
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* 수학 화면 (핵심 수정) */
+/* ===================== */
+/* 🧮 수학 화면 */
+/* ===================== */
 #mathScreen {
   position: fixed;
   top: 0;
@@ -69,24 +116,42 @@ body {
   z-index: 9999;
 }
 
+/* ⭐ 무조건 보이게 강조 */
 #mathQuestion {
-  font-size: 50px;
+  font-size: 60px;
+  color: white;
   margin-bottom: 20px;
 }
 
 #mathAnswer {
-  font-size: 25px;
-  padding: 10px;
+  font-size: 28px;
+  padding: 12px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-/* 시야 방해 */
+#mathScreen button {
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ===================== */
+/* 🕸 시야 방해 */
+/* ===================== */
 #blind {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+
   background: url("images/web.png") center/cover no-repeat;
+
   display: none;
   opacity: 0;
+  pointer-events: none;
+
   z-index: 5000;
 }
 
@@ -101,13 +166,20 @@ body {
   100% { opacity: 0; }
 }
 
+/* ===================== */
+/* 💥 효과 */
+/* ===================== */
+
 /* 흔들림 */
 .shake {
   animation: shake 0.3s;
 }
+
 @keyframes shake {
   0% { transform: translate(0,0); }
-  50% { transform: translate(5px,-5px); }
+  25% { transform: translate(5px,-5px); }
+  50% { transform: translate(-5px,5px); }
+  75% { transform: translate(5px,5px); }
   100% { transform: translate(0,0); }
 }
 
@@ -115,6 +187,7 @@ body {
 .lightning {
   animation: flash 0.2s;
 }
+
 @keyframes flash {
   0% { background: white; }
   100% { background: transparent; }
