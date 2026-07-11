@@ -275,3 +275,21 @@ function endGame() {
 
   document.getElementById("startScreen").style.display = "flex";
 }
+
+
+
+
+
+// 🔥 디버깅 강제 실행
+window.onload = () => {
+  console.log("디버깅 시작");
+
+  const ms = document.getElementById("mathScreen");
+  const mq = document.getElementById("mathQuestion");
+
+  if (!ms) console.error("mathScreen 없음");
+  if (!mq) console.error("mathQuestion 없음");
+
+  ms.style.display = "flex";
+  mq.innerText = "123 + 456 = ? (디버그)";
+};
