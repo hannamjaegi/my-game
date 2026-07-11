@@ -1,4 +1,17 @@
-/* ====== 시작 화면 ====== */
+/* ========================= */
+/* 🌍 기본 설정 */
+/* ========================= */
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle, #222, #000);
+  color: white;
+  font-family: 'Arial Black', Impact, sans-serif;
+}
+
+/* ========================= */
+/* 🎮 시작 화면 */
+/* ========================= */
 #startScreen {
   position: fixed;
   top: 0;
@@ -12,10 +25,155 @@
   justify-content: center;
   align-items: center;
 
-  z-index: 10000; /* ⭐ math보다 높게 (초기엔 위) */
+  z-index: 3000;
 }
 
-/* ====== 수학 화면 ====== */
+#startScreen h2 {
+  font-size: 50px;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #fff; }
+  to { text-shadow: 0 0 25px #00ffcc; }
+}
+
+/* ========================= */
+/* 🔘 버튼 */
+/* ========================= */
+button {
+  padding: 12px 20px;
+  margin-top: 10px;
+  font-size: 18px;
+
+  background: linear-gradient(45deg, #00ffcc, #0066ff);
+  border: none;
+  color: white;
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* ========================= */
+/* 📊 UI */
+/* ========================= */
+#ui {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+}
+
+#score {
+  font-size: 20px;
+}
+
+#timer {
+  font-size: 20px;
+}
+
+/* 타이머 위험 */
+#timer.low {
+  color: red;
+  animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* 점수 애니 */
+.score-up {
+  transform: scale(1.3);
+  color: #00ffcc;
+}
+
+/* ========================= */
+/* 🔥 버프 */
+/* ========================= */
+#buff {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  color: gold;
+  display: none;
+  z-index: 100;
+}
+
+/* ========================= */
+/* 🎯 게임 영역 */
+/* ========================= */
+#game {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* 타겟 */
+.target {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+
+  background: red;
+  border-radius: 50%;
+
+  cursor: pointer;
+  animation: pop 0.3s;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ========================= */
+/* 🌫️ 시야 방해 (완전 안전 버전) */
+/* ========================= */
+#blind {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(255,255,255,0.2);
+  display: none;
+
+  pointer-events: none;
+  z-index: 1500;
+}
+
+.blind-active {
+  display: block;
+  animation: blind 2s;
+}
+
+@keyframes blind {
+  0% { opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+/* ========================= */
+/* 🧠 수학 문제 화면 */
+/* ========================= */
 #mathScreen {
   position: fixed;
   top: 0;
@@ -23,18 +181,18 @@
   width: 100%;
   height: 100%;
 
-  background: rgba(0,0,0,0.95); /* ⭐ 완전 검정 대신 살짝 투명 */
+  background: rgba(0, 0, 0, 0.95); /* ⭐ 완전 검정 X */
   display: none;
 
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  z-index: 9999;
+  z-index: 2000;
   color: white;
 }
 
-/* ====== 문제 텍스트 ====== */
+/* 문제 텍스트 */
 #mathQuestion {
   font-size: 42px;
   color: #00ffcc;
@@ -42,12 +200,22 @@
   text-align: center;
 }
 
-/* ====== 입력창 ====== */
+/* 입력창 */
 #mathAnswer {
   font-size: 24px;
   padding: 12px;
   margin-bottom: 10px;
+
   border-radius: 8px;
   border: none;
+  outline: none;
+
   text-align: center;
+}
+
+/* ========================= */
+/* 💡 입력창 포커스 효과 */
+/* ========================= */
+#mathAnswer:focus {
+  box-shadow: 0 0 10px #00ffcc;
 }
