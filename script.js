@@ -196,18 +196,18 @@ timerText.innerText=`시간 : ${time}`;
 
 
 let speed={
-easy:1200,
-normal:900,
-hard:600,
-impossible:400
+easy:2500,
+normal:1500,
+hard:1000,
+impossible:600
 };
 
 
 let spawnCount={
-easy:3,
-normal:4,
-hard:5,
-impossible:7
+easy:2,
+normal:3,
+hard:4,
+impossible:5
 };
 
 
@@ -356,7 +356,7 @@ let time={
 easy:2500,
 normal:1500,
 hard:1000,
-impossible:700
+impossible:600
 };
 
 
