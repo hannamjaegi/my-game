@@ -1,7 +1,7 @@
 // 🎯 기본 변수
 let difficulty = "normal";
 let score = 0;
-let timeLeft = 120;
+let timeLeft = 60;
 
 let gameInterval;
 let timerInterval;
@@ -57,7 +57,7 @@ function startCountdown() {
 // 🎮 게임 시작
 function startGame() {
   score = 0;
-  timeLeft = 120;
+  timeLeft = 60;
   isGameRunning = true;
 
   clearGameArea();
@@ -192,7 +192,7 @@ function clearGameArea() {
 // 🖥️ UI 초기화
 function updateUI() {
   document.getElementById("score").innerText = "점수: 0";
-  document.getElementById("timer").innerText = "시간: 120";
+  document.getElementById("timer").innerText = "시간: 60";
 }
 
 
