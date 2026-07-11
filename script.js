@@ -634,6 +634,10 @@ function showWeb(){
 
 const web=document.getElementById("webEffect");
 
+web.classList.remove("webActive");
+
+void web.offsetWidth;
+
 
 let x=Math.random()*(window.innerWidth-350);
 let y=Math.random()*(window.innerHeight-350);
@@ -646,14 +650,11 @@ web.style.top=y+"px";
 web.classList.add("webActive");
 
 
-
 setTimeout(()=>{
 
 web.classList.remove("webActive");
 
-
 },1500);
-
 
 }
 
