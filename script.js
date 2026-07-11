@@ -31,6 +31,31 @@ function startMath() {
 
   correctAnswer = a + b;
   mathQuestion.innerText = `${a} + ${b} = ?`;
+
+  mathAnswer.value = ""; // ⭐ 이거 추가 (중요)
+}
+
+function submitAnswer() {
+  const userAnswer = parseInt(mathAnswer.value);
+
+  if (isNaN(userAnswer)) {
+    alert("숫자를 입력해!");
+    return;
+  }
+
+  if (userAnswer === correctAnswer) {
+    mathScreen.style.display = "none";
+
+    if (gameEnded) {
+      gameEnded = false;
+      document.getElementById("startScreen").style.display = "flex";
+      return;
+    }
+
+    startGame();
+  } else {
+    alert("틀림!");
+  }
 }
 
 /* 제출 */
