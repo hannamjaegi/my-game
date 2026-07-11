@@ -1,150 +1,95 @@
-/* 기본 설정 */
 body {
   margin: 0;
   overflow: hidden;
-  background: #111;
-  font-family: Arial, sans-serif;
+  background: #222;
   color: white;
-  text-align: center;
+  font-family: sans-serif;
 }
 
-/* 점수 & 시간 UI */
+/* UI */
 #ui {
   position: fixed;
   top: 10px;
   left: 10px;
   z-index: 1000;
-  font-size: 18px;
 }
 
-#score {
-  font-weight: bold;
-}
-
-#timer {
-  margin-top: 5px;
-}
-
-/* 2배 버프 표시 */
 #buff {
   position: fixed;
   top: 10px;
   right: 10px;
-  font-size: 20px;
   color: gold;
-  font-weight: bold;
   display: none;
 }
 
-/* 게임 영역 */
+/* 게임판 */
 #game {
-  position: relative;
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 
-/* 타겟 기본 스타일 */
+/* 타겟 */
 .target {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
   user-select: none;
-  touch-action: manipulation; /* 모바일 터치 개선 */
-  transition: transform 0.1s;
+  touch-action: manipulation;
 }
 
-/* 클릭 시 살짝 눌림 효과 */
-.target:active {
-  transform: scale(0.9);
-}
-
-/* 💥 폭발 (크리퍼 등) */
-.explosion {
-  animation: explode 0.3s ease;
-}
-
-@keyframes explode {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2); opacity: 0; }
-}
-
-/* ✨ 반짝 (다이아, 골드 등) */
-.sparkle {
-  animation: sparkle 0.5s ease;
-}
-
-@keyframes sparkle {
-  0% { filter: brightness(1); }
-  50% { filter: brightness(2); }
-  100% { filter: brightness(1); }
-}
-
-/* ⚡ 번개 (에메랄드 실패) */
-.lightning {
-  animation: lightning 0.3s;
-}
-
-@keyframes lightning {
-  0% { background: white; }
-  100% { background: transparent; }
-}
-
-/* 🎆 폭죽 (에메랄드 성공) */
-.firework {
-  animation: firework 0.5s ease;
-}
-
-@keyframes firework {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2); opacity: 0; }
-}
-
-/* 📳 화면 흔들림 */
+/* 흔들림 */
 .shake {
   animation: shake 0.3s;
 }
 
 @keyframes shake {
-  0% { transform: translate(0px, 0px); }
-  25% { transform: translate(5px, -5px); }
-  50% { transform: translate(-5px, 5px); }
-  75% { transform: translate(5px, 5px); }
-  100% { transform: translate(0px, 0px); }
+  0% { transform: translate(0,0); }
+  25% { transform: translate(5px,-5px); }
+  50% { transform: translate(-5px,5px); }
+  75% { transform: translate(5px,5px); }
+  100% { transform: translate(0,0); }
 }
 
-/* 🕸 시야 방해 (좀벌레 효과) */
+/* 번개 */
+.lightning {
+  animation: flash 0.2s;
+}
+@keyframes flash {
+  0% { background: white; }
+  100% { background: transparent; }
+}
+
+/* 시야 방해 */
 #blind {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  background-image: url("images/web.png"); /* 마크 거미줄 느낌 */
-  background-size: cover;
+  background: url("images/web.png") center/cover;
   opacity: 0;
-  z-index: 999;
+  pointer-events: none;
 }
 
 .blind-active {
-  animation: blindEffect 2s ease;
+  animation: blind 2s;
 }
-
-@keyframes blindEffect {
+@keyframes blind {
   0% { opacity: 0; }
   50% { opacity: 0.8; }
   100% { opacity: 0; }
 }
 
-/* 📱 모바일 최적화 */
-@media (max-width: 600px) {
-  .target {
-    width: 80px;
-    height: 80px;
-  }
-
-  #ui {
-    font-size: 16px;
-  }
+/* 수학 */
+#mathScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
