@@ -16,10 +16,23 @@ body {
 
 /* 🎯 타겟 */
 .target {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   position: absolute;
   background-size: cover;
+  background-position: center;
+
+  /* 💥 터치 최적화 */
+  touch-action: manipulation;
+}
+
+.target::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
 }
 
 /* 🎮 난이도 버튼 */
