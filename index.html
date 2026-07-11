@@ -8,45 +8,62 @@
 
 <body>
 
-<!-- 시작 -->
-<div id="startScreen">
-  <h2>🎮 집중력 게임</h2>
+<!-- 🎮 시작 화면 -->
+<div id="startScreen" class="screen">
+  <h1>🎯 집중력 두더지 게임</h1>
+
   <input id="difficultyInput" placeholder="easy / normal / hard">
-  <button onclick="googleLogin()">구글 로그인</button>
-  <button onclick="startGameButton()">게임 시작</button>
+  
+  <button onclick="googleLogin()">🔐 구글 로그인</button>
+  <button onclick="startGameButton()">🚀 시작</button>
+
   <div id="userInfo"></div>
 </div>
 
-<!-- UI -->
-<div id="ui">
-  <div id="score">점수: 0</div>
-  <div id="timer">시간: 90</div>
+
+<!-- ⏱ 카운트다운 -->
+<div id="countdown" class="screen hidden">
+  <h1 id="countText">3</h1>
 </div>
 
-<div id="buff">🔥 2배!</div>
 
-<!-- 게임 -->
-<div id="game"></div>
-
-<!-- 수학 -->
-<div id="mathScreen">
+<!-- 🧮 수학 화면 -->
+<div id="mathScreen" class="screen hidden">
   <h2 id="mathQuestion"></h2>
-  <input id="mathAnswer">
+  <input id="mathAnswer" placeholder="정답 입력">
   <button onclick="submitAnswer()">확인</button>
 </div>
 
-<!-- 랭킹 -->
-<div id="leaderboard"></div>
 
-<!-- 결과 -->
-<div id="resultScreen"></div>
+<!-- 🎯 게임 UI -->
+<div id="gameUI" class="hidden">
+  <div id="topBar">
+    <div id="score">점수: 0</div>
+    <div id="timer">시간: 90</div>
+    <div id="doubleBuff">🔥 2배 활성!</div>
+  </div>
 
-<!-- Firebase -->
+  <div id="game"></div>
+</div>
+
+
+<!-- 🏆 랭킹 -->
+<div id="leaderboard" class="screen hidden"></div>
+
+
+<!-- 📊 결과 -->
+<div id="resultScreen" class="screen hidden"></div>
+
+
+<!-- 🔊 사운드 자동 활성 트리거 -->
+<div id="soundUnlock"></div>
+
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup }
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where }
+import { getFirestore }
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -58,13 +75,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-const db = getFirestore(app);
-
-window.fb = { auth, provider, db, signInWithPopup, collection, addDoc, getDocs, query, orderBy, limit, where };
+window.fb = {
+  auth: getAuth(app),
+  provider: new GoogleAuthProvider(),
+  db: getFirestore(app),
+  signInWithPopup
+};
 </script>
 
 <script src="script.js"></script>
+
 </body>
 </html>
