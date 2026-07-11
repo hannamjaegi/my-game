@@ -568,21 +568,10 @@ url("images/silverfish.png");
 
 
 #webEffect {
-
-
-position:fixed;
-
-
-display:none;
-
-
-z-index:3000;
-
-
-
-pointer-events:none;
-
-
+    position:fixed;
+    z-index:3000;
+    pointer-events:none;
+    opacity:0;
 }
 
 
@@ -606,14 +595,8 @@ object-fit:contain;
 
 
 .webActive {
-
-
-display:block;
-
-
-animation:webAnimation 1.5s;
-
-
+    opacity:1;
+    animation:webAnimation 1.5s;
 }
 
 
