@@ -204,10 +204,10 @@ impossible:350
 
 
 let spawnCount={
-easy:2,
-normal:3,
-hard:4,
-impossible:5
+easy:3,
+normal:4,
+hard:5,
+impossible:7
 };
 
 
@@ -353,10 +353,10 @@ function getDisappearTime(){
 
 
 let time={
-easy:2500,
-normal:1800,
-hard:1200,
-impossible:700
+easy:2000,
+normal:1200,
+hard:700,
+impossible:500
 };
 
 
@@ -766,19 +766,19 @@ if(difficulty==="impossible"){
 
 
 
-if(score<30){
+if(score<20){
 
 return "PK2번0골급";
 
 }
 
-else if(score<70){
+else if(score<50){
 
 return "발롱강탈급";
 
 }
 
-else if(score<150){
+else if(score<100){
 
 return "챔스우승급";
 
@@ -801,25 +801,25 @@ return "사람아니야급";
 else{
 
 
-if(score<50){
+if(score<30){
 
 return "벤치급";
 
 }
 
-else if(score<80){
+else if(score<70){
 
 return "국대급";
 
 }
 
-else if(score<120){
+else if(score<100){
 
 return "호날두급";
 
 }
 
-else if(score<170){
+else if(score<150){
 
 return "신두급";
 
