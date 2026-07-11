@@ -1,89 +1,393 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 <meta charset="UTF-8">
-<title>집중력 두더지 게임</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI 집중력 두더지 게임</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<!-- 🎮 시작 화면 -->
+
+<!-- ======================
+     시작 화면
+====================== -->
+
 <div id="startScreen" class="screen">
-  <h1>🎯 집중력 두더지 게임</h1>
 
-  <input id="difficultyInput" placeholder="easy / normal / hard">
-  
-  <button onclick="googleLogin()">🔐 구글 로그인</button>
-  <button onclick="startGameButton()">🚀 시작</button>
+<h1>🎯 AI 집중력 두더지 게임</h1>
 
-  <div id="userInfo"></div>
+<p>
+게임 난이도를 입력하세요
+</p>
+
+
+<input 
+id="difficultyInput"
+placeholder="easy / normal / hard">
+
+
+<button id="loginBtn">
+🔐 구글 로그인
+</button>
+
+
+<button onclick="startGameButton()">
+게임 시작
+</button>
+
+
+<div id="userInfo">
+로그인 필요
 </div>
 
 
-<!-- ⏱ 카운트다운 -->
-<div id="countdown" class="screen hidden">
-  <h1 id="countText">3</h1>
 </div>
 
 
-<!-- 🧮 수학 화면 -->
+
+
+
+<!-- ======================
+     수학 문제 화면
+====================== -->
+
 <div id="mathScreen" class="screen hidden">
-  <h2 id="mathQuestion"></h2>
-  <input id="mathAnswer" placeholder="정답 입력">
-  <button onclick="submitAnswer()">확인</button>
+
+<h2 id="mathQuestion">
+문제
+</h2>
+
+
+<input 
+type="number"
+id="mathAnswer"
+placeholder="정답">
+
+
+<button onclick="submitAnswer()">
+확인
+</button>
+
+
 </div>
 
 
-<!-- 🎯 게임 UI -->
-<div id="gameUI" class="hidden">
-  <div id="topBar">
-    <div id="score">점수: 0</div>
-    <div id="timer">시간: 90</div>
-    <div id="doubleBuff">🔥 2배 활성!</div>
-  </div>
 
-  <div id="game"></div>
+
+
+
+
+<!-- ======================
+     카운트다운
+====================== -->
+
+
+<div id="countdown" class="screen hidden">
+
+<h1 id="countNumber">
+5
+</h1>
+
 </div>
 
 
-<!-- 🏆 랭킹 -->
-<div id="leaderboard" class="screen hidden"></div>
 
 
-<!-- 📊 결과 -->
-<div id="resultScreen" class="screen hidden"></div>
 
 
-<!-- 🔊 사운드 자동 활성 트리거 -->
-<div id="soundUnlock"></div>
+
+
+<!-- ======================
+     게임 화면
+====================== -->
+
+
+<div id="gameScreen" class="hidden">
+
+
+<div id="ui">
+
+
+<div id="score">
+점수 : 0
+</div>
+
+
+<div id="timer">
+시간 : 90
+</div>
+
+
+<div id="doubleMessage">
+🔥 다음 점수 2배!
+</div>
+
+
+</div>
+
+
+
+<div id="game">
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ======================
+     web 방해 효과
+====================== -->
+
+
+<div id="webEffect">
+
+<img src="images/web.png">
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ======================
+     결과 화면
+====================== -->
+
+
+<div id="resultScreen" class="screen hidden">
+
+
+<h1>
+게임 결과
+</h1>
+
+
+<div id="finalScore">
+
+</div>
+
+
+<div id="grade">
+
+</div>
+
+
+<button onclick="restartGame()">
+계속하기
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ======================
+     랭킹
+====================== -->
+
+
+<div id="rankingScreen" class="screen hidden">
+
+
+<h1>
+🏆 랭킹
+</h1>
+
+
+<div id="rankingList">
+
+</div>
+
+
+<button onclick="restartGame()">
+처음으로
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ======================
+     사운드
+====================== -->
+
+
+<audio id="explosion"
+src="sounds/explosion.mp3">
+</audio>
+
+
+<audio id="thunder"
+src="sounds/thunder.mp3">
+</audio>
+
+
+<audio id="firework"
+src="sounds/firework.mp3">
+</audio>
+
+
+<audio id="bad"
+src="sounds/bad.mp3">
+</audio>
+
+
+
+
+
+
+
+
+
+<!-- ======================
+ Firebase
+====================== -->
 
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup }
-from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-import { getFirestore }
-from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+import { initializeApp }
+from
+"https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+
+import {
+
+getAuth,
+GoogleAuthProvider,
+signInWithPopup
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
+
+import {
+
+getFirestore
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "molegame-edda5.firebaseapp.com",
-  projectId: "molegame-edda5",
-  appId: "1:338866969088:web:b3fbc88a499b4fab5296e5"
+
+
+apiKey:
+"여기에 Firebase apiKey",
+
+
+authDomain:
+"molegame-edda5.firebaseapp.com",
+
+
+projectId:
+"molegame-edda5",
+
+
+storageBucket:
+"molegame-edda5.firebasestorage.app",
+
+
+messagingSenderId:
+"338866969088",
+
+
+appId:
+"여기에 appId"
+
+
 };
 
-const app = initializeApp(firebaseConfig);
 
-window.fb = {
-  auth: getAuth(app),
-  provider: new GoogleAuthProvider(),
-  db: getFirestore(app),
-  signInWithPopup
+
+
+const app =
+initializeApp(firebaseConfig);
+
+
+
+const auth =
+getAuth(app);
+
+
+
+const provider =
+new GoogleAuthProvider();
+
+
+
+const db =
+getFirestore(app);
+
+
+
+
+window.firebaseData = {
+
+
+auth,
+provider,
+db,
+signInWithPopup
+
+
 };
+
+
+
 </script>
+
+
+
+
+
+
 
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
