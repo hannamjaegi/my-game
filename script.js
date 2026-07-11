@@ -196,10 +196,10 @@ timerText.innerText=`시간 : ${time}`;
 
 
 let speed={
-easy:1500,
+easy:1200,
 normal:900,
-hard:500,
-impossible:350
+hard:600,
+impossible:400
 };
 
 
@@ -353,10 +353,10 @@ function getDisappearTime(){
 
 
 let time={
-easy:2000,
-normal:1200,
-hard:700,
-impossible:500
+easy:2500,
+normal:1500,
+hard:1000,
+impossible:700
 };
 
 
@@ -452,7 +452,7 @@ break;
 case "emerald":
 
 
-if(Math.random()<0.5){
+if(Math.random()<0.7){
 
 point=5;
 
