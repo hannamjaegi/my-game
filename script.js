@@ -24,7 +24,8 @@ function startGameButton() {
 
 /* 수학 문제 */
 function startMath() {
-  console.log("문제 생성됨"); // ⭐ 확인용
+  // ⭐ 이거 추가 (핵심)
+  document.getElementById("startScreen").style.display = "none";
 
   mathScreen.style.display = "flex";
 
@@ -32,11 +33,8 @@ function startMath() {
   const b = Math.floor(Math.random() * 10);
 
   correctAnswer = a + b;
-
   mathQuestion.innerText = `${a} + ${b} = ?`;
   mathAnswer.value = "";
-
-  console.log(mathQuestion.innerText); // ⭐ 값 확인
 }
 
 function submitAnswer() {
