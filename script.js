@@ -1,4 +1,5 @@
 
+
 const game = document.getElementById("game");
 const scoreEl = document.getElementById("score");
 const timerEl = document.getElementById("timer");
