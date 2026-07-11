@@ -1,4 +1,8 @@
 
+#mathScreen {
+  z-index: 9999; /* ⭐ 이걸로 올려 */
+}
+
 body {
   margin: 0;
   overflow: hidden;
