@@ -461,7 +461,7 @@ playSound("firework");
 
 }else{
 
-point=-5;
+point=-2;
 
 playSound("thunder");
 
