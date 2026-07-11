@@ -196,16 +196,26 @@ timerText.innerText=`시간 : ${time}`;
 
 
 let speed={
-easy:1200,
+easy:1500,
 normal:900,
-hard:600,
+hard:500,
 impossible:350
+};
+
+
+let spawnCount={
+easy:2,
+normal:3,
+hard:4,
+impossible:5
 };
 
 
 targetInterval=setInterval(()=>{
 
+for(let i=0;i<spawnCount[difficulty];i++){
 spawnTarget();
+}
 
 },speed[difficulty]);
 
@@ -256,6 +266,10 @@ target.className="target";
 let types=[
 
 "mole",
+"mole",
+"mole",
+"mole",
+"diamond",
 "diamond",
 "emerald",
 "gold",
@@ -593,6 +607,17 @@ const sound=document.getElementById(name);
 if(!sound)return;
 
 sound.currentTime=0;
+
+if(name==="thunder"){
+sound.volume=0.25;
+}
+else if(name==="firework"){
+sound.volume=0.8;
+}
+else{
+sound.volume=0.6;
+}
+
 sound.play();
 
 }
