@@ -1,221 +1,158 @@
-/* ========================= */
-/* 🌍 기본 설정 */
-/* ========================= */
+/* 전체 */
 body {
   margin: 0;
-  overflow: hidden;
-  background: radial-gradient(circle, #222, #000);
+  background: #0f172a;
   color: white;
-  font-family: 'Arial Black', Impact, sans-serif;
+  font-family: Arial;
+  overflow: hidden;
 }
 
-/* ========================= */
-/* 🎮 시작 화면 */
-/* ========================= */
-#startScreen {
+/* 공통 화면 */
+.screen {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-
-  background: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  z-index: 3000;
+  background: rgba(0,0,0,0.9);
 }
 
-#startScreen h2 {
-  font-size: 50px;
-  animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px #fff; }
-  to { text-shadow: 0 0 25px #00ffcc; }
-}
-
-/* ========================= */
-/* 🔘 버튼 */
-/* ========================= */
-button {
-  padding: 12px 20px;
-  margin-top: 10px;
-  font-size: 18px;
-
-  background: linear-gradient(45deg, #00ffcc, #0066ff);
-  border: none;
-  color: white;
-  border-radius: 10px;
-
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button:hover {
-  transform: scale(1.1);
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-/* ========================= */
-/* 📊 UI */
-/* ========================= */
-#ui {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 100;
-}
-
-#score {
-  font-size: 20px;
-}
-
-#timer {
-  font-size: 20px;
-}
-
-/* 타이머 위험 */
-#timer.low {
-  color: red;
-  animation: blink 0.5s infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-/* 점수 애니 */
-.score-up {
-  transform: scale(1.3);
-  color: #00ffcc;
-}
-
-/* ========================= */
-/* 🔥 버프 */
-/* ========================= */
-#buff {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  color: gold;
+.hidden {
   display: none;
-  z-index: 100;
 }
 
-/* ========================= */
-/* 🎯 게임 영역 */
-/* ========================= */
+/* 시작 화면 */
+#startScreen h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+#startScreen input {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 카운트다운 */
+#countText {
+  font-size: 100px;
+  color: yellow;
+}
+
+/* 수학 */
+#mathQuestion {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+#mathAnswer {
+  padding: 10px;
+  font-size: 20px;
+}
+
+/* 게임 UI */
+#gameUI {
+  width: 100%;
+  height: 100%;
+}
+
+#topBar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: #1e293b;
+  padding: 10px;
+  z-index: 10;
+}
+
+#score, #timer {
+  font-size: 20px;
+}
+
+/* 2배 버프 표시 */
+#doubleBuff {
+  color: yellow;
+  display: none;
+  font-weight: bold;
+}
+
+/* 게임 영역 */
 #game {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: relative;
-  z-index: 1;
 }
 
-/* 타겟 */
+/* 타겟 기본 */
 .target {
   position: absolute;
-  width: 80px;
-  height: 80px;
-
-  background: red;
-  border-radius: 50%;
-
+  width: 70px;
+  height: 70px;
+  background-size: cover;
   cursor: pointer;
-  animation: pop 0.3s;
+  transition: transform 0.1s;
 }
 
-@keyframes pop {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.target:active {
+  transform: scale(0.8);
 }
 
-/* ========================= */
-/* 🌫️ 시야 방해 (완전 안전 버전) */
-/* ========================= */
-#blind {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background: rgba(255,255,255,0.2);
-  display: none;
-
-  pointer-events: none;
-  z-index: 1500;
+/* 🎯 종류별 이미지 */
+.mole {
+  background-image: url("img/mole.png");
 }
 
-.blind-active {
-  display: block;
-  animation: blind 2s;
+.diamond {
+  background-image: url("img/diamond.png");
 }
 
-@keyframes blind {
-  0% { opacity: 0; }
-  50% { opacity: 0.7; }
-  100% { opacity: 0; }
+.emerald {
+  background-image: url("img/emerald.png");
 }
 
-/* ========================= */
-/* 🧠 수학 문제 화면 */
-/* ========================= */
-#mathScreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background: rgba(0, 0, 0, 0.95); /* ⭐ 완전 검정 X */
-  display: none;
-
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 2000;
-  color: white;
+.gold {
+  background-image: url("img/gold.png");
 }
 
-/* 문제 텍스트 */
-#mathQuestion {
-  font-size: 42px;
-  color: #00ffcc;
+.creeper {
+  background-image: url("img/creeper.png");
+}
+
+.silverfish {
+  background-image: url("img/silverfish.png");
+}
+
+/* 랭킹 */
+#leaderboard {
+  overflow-y: auto;
+}
+
+#leaderboard h3 {
   margin-bottom: 20px;
-  text-align: center;
 }
 
-/* 입력창 */
-#mathAnswer {
-  font-size: 24px;
-  padding: 12px;
-  margin-bottom: 10px;
-
-  border-radius: 8px;
-  border: none;
-  outline: none;
-
-  text-align: center;
+#leaderboard div {
+  margin: 5px;
 }
 
-/* ========================= */
-/* 💡 입력창 포커스 효과 */
-/* ========================= */
-#mathAnswer:focus {
-  box-shadow: 0 0 10px #00ffcc;
+/* 결과 */
+#resultScreen h2 {
+  font-size: 40px;
+}
+
+#resultScreen button {
+  margin-top: 20px;
+  font-size: 18px;
 }
