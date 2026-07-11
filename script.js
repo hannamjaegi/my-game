@@ -700,7 +700,8 @@ startMath();
 
 function finishGame(){
 
-
+console.log("현재 난이도:", difficulty);
+console.log("최종 점수:", finalScore);
 let mathBonus=0;
 
 
