@@ -11,29 +11,51 @@
 <!-- 시작 화면 -->
 <div id="startScreen">
   <h2>🎮 두더지 게임</h2>
-  <input id="difficultyInput" placeholder="난이도 (easy / normal / hard)">
+  <input id="difficultyInput" placeholder="easy / normal / hard">
+  <button onclick="googleLogin()">구글 로그인</button>
   <button onclick="startGameButton()">게임 시작</button>
+  <div id="userInfo"></div>
 </div>
 
 <!-- UI -->
 <div id="ui">
   <div id="score">점수: 0</div>
-  <div id="timer">시간: 60</div>
+  <div id="timer">시간: 90</div>
 </div>
 
-<div id="buff">🔥 2배!</div>
-
-<!-- 게임판 -->
 <div id="game"></div>
-<div id="blind"></div>
 
-<!-- 수학 문제 -->
-<div id="mathScreen">
-  <h2 id="mathQuestion"></h2>
-  <input type="number" id="mathAnswer">
-  <button onclick="submitAnswer()">확인</button>
-</div>
+<!-- 랭킹 -->
+<div id="leaderboard"></div>
+
+<!-- 결과 -->
+<div id="resultScreen"></div>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup }
+  from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, where }
+  from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "molegame-edda5.firebaseapp.com",
+  projectId: "molegame-edda5",
+  appId: "1:338866969088:web:b3fbc88a499b4fab5296e5"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const db = getFirestore(app);
+
+window.fb = { auth, provider, db, signInWithPopup, collection, addDoc, getDocs, query, orderBy, limit, where };
+</script>
 
 <script src="script.js"></script>
+
 </body>
 </html>
