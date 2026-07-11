@@ -198,8 +198,8 @@ timerText.innerText=`시간 : ${time}`;
 let speed={
 easy:2500,
 normal:1500,
-hard:1000,
-impossible:700
+hard:900,
+impossible:500
 };
 
 
@@ -207,7 +207,7 @@ let spawnCount={
 easy:2,
 normal:3,
 hard:4,
-impossible:7
+impossible:8
 };
 
 
@@ -355,8 +355,8 @@ function getDisappearTime(){
 let time={
 easy:2800,
 normal:1800,
-hard:1200,
-impossible:900
+hard:1100,
+impossible:700
 };
 
 
