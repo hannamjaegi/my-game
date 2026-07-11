@@ -199,7 +199,7 @@ let speed={
 easy:2500,
 normal:1500,
 hard:1000,
-impossible:600
+impossible:700
 };
 
 
@@ -207,7 +207,7 @@ let spawnCount={
 easy:2,
 normal:3,
 hard:4,
-impossible:5
+impossible:7
 };
 
 
@@ -353,10 +353,10 @@ function getDisappearTime(){
 
 
 let time={
-easy:2500,
-normal:1500,
-hard:1000,
-impossible:600
+easy:2800,
+normal:1800,
+hard:1200,
+impossible:900
 };
 
 
