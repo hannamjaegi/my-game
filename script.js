@@ -437,8 +437,6 @@ break;
 
 case "silverfish":
 
-alert("좀벌레 작동");
-
 point=-1;
 
 playSound("bad");
