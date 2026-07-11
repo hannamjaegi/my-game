@@ -119,5 +119,20 @@ button:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1500;
+  z-index: 9999;
+  color: white; /* ⭐ 이거 추가 */
+}
+
+/* ⭐ 문제 텍스트 강제 표시 */
+#mathQuestion {
+  font-size: 40px;
+  color: #00ffcc;
+  margin-bottom: 20px;
+}
+
+/* ⭐ 입력창 */
+#mathAnswer {
+  font-size: 24px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
