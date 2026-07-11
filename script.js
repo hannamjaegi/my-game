@@ -24,15 +24,19 @@ function startGameButton() {
 
 /* 수학 문제 */
 function startMath() {
+  console.log("문제 생성됨"); // ⭐ 확인용
+
   mathScreen.style.display = "flex";
 
   const a = Math.floor(Math.random() * 10);
   const b = Math.floor(Math.random() * 10);
 
   correctAnswer = a + b;
-  mathQuestion.innerText = `${a} + ${b} = ?`;
 
-  mathAnswer.value = ""; // ⭐ 이거 추가 (중요)
+  mathQuestion.innerText = `${a} + ${b} = ?`;
+  mathAnswer.value = "";
+
+  console.log(mathQuestion.innerText); // ⭐ 값 확인
 }
 
 function submitAnswer() {
