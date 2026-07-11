@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-
-<div id="startScreen">
-  <h2>게임 시작</h2>
-  <input id="difficultyInput" placeholder="난이도 입력 (easy/normal/hard)">
-  <button onclick="startGameButton()">시작</button>
-</div>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>두더지 게임</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<!-- 시작 화면 -->
+<div id="startScreen">
+  <h2>게임 시작</h2>
+  <input id="difficultyInput" placeholder="난이도 입력 (easy/normal/hard)">
+  <button onclick="startGameButton()">시작</button>
+</div>
+
+<!-- UI -->
 <div id="ui">
   <div id="score">점수: 0</div>
   <div id="timer">시간: 60</div>
@@ -20,6 +23,7 @@
 
 <div id="buff">🔥 2배!</div>
 
+<!-- 게임 영역 -->
 <div id="game"></div>
 <div id="blind"></div>
 
@@ -31,5 +35,6 @@
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
