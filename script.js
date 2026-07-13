@@ -199,7 +199,7 @@ let speed={
 easy:2500,
 normal:1500,
 hard:1000,
-impossible:750
+impossible:700
 };
 
 
@@ -358,8 +358,8 @@ function getDisappearTime(){
 let time={
 easy:2800,
 normal:1800,
-hard:1150,
-impossible:800
+hard:1100,
+impossible:700
 };
 
 
