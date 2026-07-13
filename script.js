@@ -26,7 +26,7 @@ const doubleMessage=document.getElementById("doubleMessage");
 
 let difficulty="normal";
 let score=0;
-let time=90;
+let time=60;
 
 let gameTimer=null;
 
@@ -182,7 +182,7 @@ function startGame(){
 gameScreen.classList.remove("hidden");
 
 score=0;
-time=90;
+time=60;
 
 gameStarted=true;
 gameEnded=false;
@@ -268,11 +268,8 @@ let types=[
 "mole",
 "mole",
 "mole",
-"mole",
 "diamond",
 "diamond",
-"diamond",
-"emerald",
 "emerald",
 "gold",
 "gold",
@@ -428,7 +425,7 @@ break;
 
 case "creeper":
 
-point=-3;
+point=-5;
 
 playSound("explosion");
 
@@ -464,7 +461,7 @@ playSound("firework");
 
 }else{
 
-point=-2;
+point=-3;
 
 playSound("thunder");
 
