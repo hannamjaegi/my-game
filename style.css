@@ -98,7 +98,12 @@ button:hover{
 .hidden{
     display:none !important;
 }
-
+.screen{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
 /* 더블 메시지 */
 #doubleMessage{
     position:absolute;
