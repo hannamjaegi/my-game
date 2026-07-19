@@ -41,6 +41,8 @@ button:hover{
     background-image:
     radial-gradient(rgba(255,255,255,0.05) 1px,transparent 1px);
     background-size:40px 40px;
+    position:relative;
+    z-index:1;
 }
 
 /* 점수 */
@@ -109,7 +111,7 @@ button:hover{
 /* 결과 화면 */
 #resultScreen{
     display:none;
-    position:absolute;
+    position:fixed; /* absolute → fixed 변경 */
     top:0;
     left:0;
     width:100%;
@@ -118,8 +120,8 @@ button:hover{
     justify-content:center;
     align-items:center;
     flex-direction:column;
+    z-index:999; /* 추가 */
 }
-
 /* 등급 */
 #grade{
     font-size:40px;
