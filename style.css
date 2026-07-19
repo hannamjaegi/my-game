@@ -36,7 +36,6 @@ button:hover{
 
 /* 게임 화면 */
 #game{
-    display:none;
     margin-top:20px;
     background-image:
     radial-gradient(rgba(255,255,255,0.05) 1px,transparent 1px);
