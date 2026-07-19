@@ -1,820 +1,159 @@
-/* =========================
-   기본 설정
-========================= */
-
-* {
-    box-sizing: border-box;
-}
-
-
-body {
-
+body{
     margin:0;
-
-    width:100vw;
-    height:100vh;
-
-    overflow:hidden;
-
+    font-family:sans-serif;
     background:
-    radial-gradient(circle,#263238,#000);
-
-    color:white;
-
-    font-family:
-    Arial,
-    sans-serif;
-
+    radial-gradient(circle at center,
+    #0f172a 0%,
+    #020617 70%,
+    #000 100%);
+    color:#fff;
+    text-align:center;
 }
 
+/* 시작 화면 */
+#startScreen{
+    margin-top:50px;
+}
 
+/* 버튼 네온 스타일 */
+button{
+    padding:10px 20px;
+    margin:10px;
+    font-size:16px;
+    cursor:pointer;
+    border:none;
+    border-radius:8px;
+    color:#fff;
+    background:linear-gradient(45deg,#00f5ff,#0072ff);
+    box-shadow:0 0 10px #00f5ff;
+    transition:0.2s;
+}
 
+button:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 20px #00f5ff,0 0 40px #0072ff;
+}
 
+/* 게임 화면 */
+#game{
+    display:none;
+    margin-top:20px;
+    background-image:
+    radial-gradient(rgba(255,255,255,0.05) 1px,transparent 1px);
+    background-size:40px 40px;
+}
 
-/* =========================
-   공통 화면
-========================= */
+/* 점수 */
+#score{
+    font-size:28px;
+    font-weight:bold;
+    color:#22d3ee;
+    text-shadow:0 0 10px #22d3ee;
+    transition:0.1s;
+}
 
+/* 타이머 */
+#timer{
+    font-size:26px;
+    margin-top:10px;
+}
 
-.screen {
+/* 타겟 영역 */
+#targets{
+    display:grid;
+    grid-template-columns:repeat(3,100px);
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+}
 
-    position:fixed;
+/* 타겟 기본 */
+.target{
+    width:100px;
+    height:100px;
+    cursor:pointer;
+    transition:0.1s;
+}
 
-    width:100%;
-    height:100%;
+/* 클릭 타격감 */
+.target:active{
+    transform:scale(1.2);
+}
 
+/* 블록 효과 */
+.diamond{
+    filter:drop-shadow(0 0 10px cyan);
+}
+
+.gold{
+    filter:drop-shadow(0 0 10px gold);
+}
+
+.creeper{
+    filter:drop-shadow(0 0 10px red);
+}
+
+/* 더블 메시지 */
+#doubleMessage{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:22px;
+    color:gold;
+    text-shadow:0 0 20px gold;
+    opacity:0;
+    transition:0.5s;
+}
+
+/* 결과 화면 */
+#resultScreen{
+    display:none;
+    position:absolute;
     top:0;
     left:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:
-    rgba(0,0,0,0.85);
-
-    z-index:5000;
-
-}
-
-
-
-.hidden {
-
-    display:none !important;
-
-}
-
-
-
-
-
-
-
-/* =========================
-   시작 화면
-========================= */
-
-
-#startScreen h1 {
-
-
-    font-size:45px;
-
-    text-shadow:
-    0 0 15px #00ffff;
-
-
-}
-
-
-#difficultyInput {
-
-
-    width:250px;
-
-    padding:15px;
-
-    font-size:20px;
-
-    margin:15px;
-
-    border-radius:10px;
-
-    border:none;
-
-
-}
-
-
-
-button {
-
-
-    padding:13px 25px;
-
-    margin:8px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-
-    border:none;
-
-    border-radius:10px;
-
-
-    cursor:pointer;
-
-
-    background:
-    linear-gradient(
-    45deg,
-    #00c6ff,
-    #0072ff
-    );
-
-
-    color:white;
-
-
-}
-
-
-
-button:hover {
-
-
-    transform:scale(1.08);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   수학 화면
-========================= */
-
-
-#mathQuestion {
-
-
-    font-size:45px;
-
-    color:#00ffff;
-
-
-}
-
-
-
-#mathAnswer {
-
-
-    font-size:25px;
-
-    padding:10px;
-
-    text-align:center;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   카운트다운
-========================= */
-
-
-#countNumber {
-
-
-    font-size:120px;
-
-    color:yellow;
-
-
-    animation:
-    countEffect
-    1s
-    infinite;
-
-
-}
-
-
-
-@keyframes countEffect {
-
-
-    0%{
-
-        transform:scale(1);
-
-    }
-
-
-    50%{
-
-        transform:scale(1.3);
-
-    }
-
-
-    100%{
-
-        transform:scale(1);
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/* =========================
-   게임 UI
-========================= */
-
-
-#gameScreen {
-
-
     width:100%;
     height:100%;
-
-
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
 }
 
-
-
-#ui {
-
-
-    position:fixed;
-
-
-    top:10px;
-
-    left:10px;
-
-
-    right:10px;
-
-
-    display:flex;
-
-    justify-content:space-between;
-
-
-    z-index:100;
-
-
-    font-size:25px;
-
-
+/* 등급 */
+#grade{
+    font-size:40px;
+    text-shadow:0 0 20px gold;
+    animation:glow 1s infinite alternate;
 }
 
-
-
-
-
-#score {
-
-
-    color:#00ffcc;
-
-
+/* 등급 글로우 애니메이션 */
+@keyframes glow{
+    from{ text-shadow:0 0 10px gold; }
+    to{ text-shadow:0 0 30px yellow; }
 }
 
-
-
-#timer {
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-/* 금 효과 표시 */
-
-
-#doubleMessage {
-
-
-    display:none;
-
-
-    color:gold;
-
-
-    font-weight:bold;
-
-
-    animation:
-    glow 0.8s infinite alternate;
-
-
-}
-
-
-
-@keyframes glow {
-
-
-from{
-
-text-shadow:
-0 0 5px gold;
-
-}
-
-
-to{
-
-text-shadow:
-0 0 25px gold;
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/* =========================
-   게임판
-========================= */
-
-
-#game {
-
-
-    width:100vw;
-
-    height:100vh;
-
-
-    position:relative;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   타겟
-========================= */
-
-
-.target {
-
-
+/* 거미줄 효과 */
+#webEffect{
     position:absolute;
-
-
-    width:90px;
-
-    height:90px;
-
-
-    background-size:contain;
-
-    background-repeat:no-repeat;
-
-    background-position:center;
-
-
-    cursor:pointer;
-
-
-    user-select:none;
-
-
-    touch-action:none;
-
-
-    animation:
-    appear
-    0.25s;
-
-
-}
-
-
-
-
-@keyframes appear {
-
-
-from{
-
-
-transform:scale(0);
-
-
-opacity:0;
-
-
-}
-
-
-to{
-
-
-transform:scale(1);
-
-opacity:1;
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   이미지 연결
-========================= */
-
-
-.mole {
-
-
-background-image:
-url("images/mole.png");
-
-
-}
-
-
-
-.diamond {
-
-
-background-image:
-url("images/diamond.png");
-
-
-}
-
-
-
-.emerald {
-
-
-background-image:
-url("images/emerald.png");
-
-
-}
-
-
-
-.gold {
-
-
-background-image:
-url("images/gold.png");
-
-
-}
-
-
-
-.creeper {
-
-
-background-image:
-url("images/creeper.png");
-
-
-}
-
-
-
-.silverfish {
-
-
-background-image:
-url("images/silverfish.png");
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   web 방해 효과
-========================= */
-
-
-#webEffect {
-    position:fixed;
-    z-index:3000;
-    pointer-events:none;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url('web.png') center/cover;
     opacity:0;
+    pointer-events:none;
 }
 
-
-
-
-#webEffect img {
-
-
-width:500px;
-
-height:500px;
-
-
-object-fit:contain;
-
-
-}
-
-
-
-
-
-.webActive {
+/* 거미줄 활성화 */
+.webActive{
     opacity:1;
     animation:webAnimation 1.5s;
+    filter:brightness(1.5);
 }
 
-
-
-
-@keyframes webAnimation {
-
-
-
-0%{
-
-
-opacity:0;
-
-
-transform:scale(0.5);
-
-
-}
-
-
-
-30%{
-
-
-opacity:1;
-
-
-transform:scale(1);
-
-
-}
-
-
-
-100%{
-
-
-opacity:0;
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/* =========================
-   결과 화면
-========================= */
-
-
-#resultScreen h1 {
-
-
-font-size:45px;
-
-
-}
-
-
-#finalScore {
-
-
-font-size:30px;
-
-margin:15px;
-
-
-}
-
-
-
-#grade {
-
-
-font-size:35px;
-
-
-color:gold;
-
-
-text-align:center;
-
-
-max-width:90%;
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/* =========================
-   랭킹
-========================= */
-
-
-#rankingList {
-
-
-width:80%;
-
-
-max-height:60vh;
-
-
-overflow:auto;
-
-
-font-size:22px;
-
-
-}
-
-
-
-.rank {
-
-
-margin:10px;
-
-
-padding:10px;
-
-
-background:
-rgba(255,255,255,0.1);
-
-
-border-radius:10px;
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/* =========================
-   모바일 대응
-========================= */
-
-
-@media(max-width:600px){
-
-
-#startScreen h1 {
-
-
-font-size:32px;
-
-
-}
-
-
-#ui {
-
-
-font-size:18px;
-
-
-}
-
-
-
-.target {
-
-
-width:60px;
-
-height:60px;
-
-
-}
-
-
-
-#webEffect img {
-
-
-width:250px;
-
-height:250px;
-
-
-}
-
-
-
-#mathQuestion {
-
-
-font-size:30px;
-
-
-}
-
-
-
+@keyframes webAnimation{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
 }
