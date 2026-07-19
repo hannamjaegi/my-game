@@ -75,6 +75,7 @@ button:hover{
     height:100px;
     cursor:pointer;
     transition:0.1s;
+    position:absolute;
 }
 
 /* 클릭 타격감 */
@@ -93,6 +94,9 @@ button:hover{
 
 .creeper{
     filter:drop-shadow(0 0 10px red);
+}
+.hidden{
+    display:none !important;
 }
 
 /* 더블 메시지 */
